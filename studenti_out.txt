@@ -1,0 +1,6 @@
+Student { matricol='1024', nume='Mihalcea', prenume='Ioan', grupa='ISM141/1' }
+Student { matricol='1025', nume='Popa', prenume='Andrei', grupa='ISM141/2' }
+Student { matricol='1026', nume='Prodan', prenume='Anamaria', grupa='TI131/1' }
+Student { matricol='1026', nume='Popescu', prenume='Bianca', grupa='TI131/2' }
+Student { matricol='1027', nume='Mohanu', prenume='Paul', grupa='TI132/1' }
+Student { matricol='1028', nume='Ionescu', prenume='Mihai', grupa='TI132/2' }

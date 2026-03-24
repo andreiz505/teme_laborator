@@ -29,4 +29,10 @@ public class Student {
     public int hashCode(){
         return Objects.hash(nume,prenume,formatieDeStudiu);
     }
+    public String getNume() {
+        return nume;
+    }
+    public String getFormatieDeStudiu() {
+        return formatieDeStudiu;
+    }
 }
