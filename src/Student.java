@@ -5,7 +5,7 @@ public class Student {
     private String nume;
     private String prenume;
     private String formatieDeStudiu;
-    private float nota;
+    protected float nota;
 
     public Student(String nr_matricol, String nume, String prenume, String formatieDeStudiu) {
         this.nr_matricol = nr_matricol;
@@ -14,25 +14,34 @@ public class Student {
         this.formatieDeStudiu = formatieDeStudiu;
         this.nota = 0.0f;
     }
-    public void setNota(float nota){
-        this.nota=nota;
+
+    public void setNota(float nota) {
+        this.nota = nota;
     }
-    public float getNota(){
+
+    public float getNota() {
         return nota;
     }
-    public String getNume(){
+
+    public String getNume() {
         return nume;
     }
-    public String getPrenume(){
+
+    public String getPrenume() {
         return prenume;
     }
-    public String getFormatieDeStudiu(){
+
+    public String getFormatieDeStudiu() {
         return formatieDeStudiu;
     }
+
     @Override
     public String toString() {
-        return "Student { matricol='" + nr_matricol + "', nume='" + nume + "', prenume='" + prenume + "', grupa='" + formatieDeStudiu + "', nota=" + nota + " }";
+        return "Student { matricol='" + nr_matricol + "', nume='" + nume +
+                "', prenume='" + prenume + "', grupa='" + formatieDeStudiu +
+                "', nota=" + nota + " }";
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,6 +51,7 @@ public class Student {
                 Objects.equals(prenume, student.prenume) &&
                 Objects.equals(formatieDeStudiu, student.formatieDeStudiu);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(nume, prenume, formatieDeStudiu);
