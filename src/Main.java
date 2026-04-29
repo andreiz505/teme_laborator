@@ -1,72 +1,51 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
-        String fisierStudenti = "studenti_in.txt";
-        String fisierNote = "note.txt";
-        Map<String, Student> mapStudenti = new HashMap<>();
-        try {
-            List<String> liniiStudenti = Files.readAllLines(Paths.get(fisierStudenti));
-            for (String linie : liniiStudenti) {
-                String[] bucati = linie.split(",");
-                if (bucati.length == 4) {
-                    String matricol = bucati[0].trim();
-                    String prenume = bucati[1].trim();
-                    String nume = bucati[2].trim();
-                    String formatie = bucati[3].trim();
-                    mapStudenti.put(matricol, new Student(matricol, nume, prenume, formatie));
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Nu se poate citi");
-        }
-        try {
-            List<String> liniiNote = Files.readAllLines(Paths.get(fisierNote));
-            for (String linie : liniiNote) {
-                String[] bucati = linie.split(",");
-                if (bucati.length == 2) {
-                    String matricol = bucati[0].trim();
-                    float nota = Float.parseFloat(bucati[1].trim());
-                    Student studentGasit = mapStudenti.get(matricol);
-                    if (studentGasit != null) {
-                        studentGasit.setNota(nota);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Nu s-a putut citi note.txt");
-        }
+        System.out.println("Total instance count is " + Form.getInstanceCount());
 
-        System.out.println(" Lista studentilor actualizata cu note ");
-        for (Student s : mapStudenti.values()) {
+        PasswordMaker pm2 = PasswordMaker.getInstance();
+        System.out.println("\n a+b) Generated passwords: ");
+        System.out.println("1:" + PasswordMaker.getInstance().getPassword());
+        System.out.println("2:" + PasswordMaker.getInstance().getPassword());
+        System.out.println("3:" + PasswordMaker.getInstance().getPassword());
+        System.out.println("4:" + pm2.getPassword());
+        System.out.println("5:" + pm2.getPassword());
+        System.out.println("\n c) Number of time  " + PasswordMaker.getCallingCounts());
+
+        Set<Student> studenti = new HashSet<>();
+        studenti.add(new Student("1024", "Popescu", "Ion", "TI131", 9.5f));
+        studenti.add(new Student("1025", "Ionescu", "Ana", "TI131", 8.5f));
+        studenti.add(new Student("1026", "Marin", "George", "TI131", 7.0f));
+        studenti.add(new Student("1027", "Vasile", "Elena", "TI131", 10.0f));
+        studenti.add(new Student("1028", "Dumitru", "Alex", "TI131", 6.5f));
+
+        Set<Student> studentiRepartizati = imparteInDouaFormatii(studenti, "TI 211 1", "TI 211 2");
+
+        System.out.println("\n- Lista Noua Studenti -");
+        for (Student s : studentiRepartizati) {
             System.out.println(s);
         }
-        float notaM = gasesteNota("Bianca", "Popescu", mapStudenti);
-        float notaN = gasesteNota("loan", "Popa", mapStudenti);
-
-        System.out.println("Nota Bianca: " + notaM);
-        System.out.println("Nota loan: " + notaN);
     }
 
-    public static float gasesteNota(String prenume, String nume, Map<String, Student> mapInitial) {
+    static Student schimbaFormatia(Student st, String nouaFormatieDeStudiu) {
+        return new Student(st.getNr_matricol(), st.getNume(), st.getPrenume(), nouaFormatieDeStudiu, st.getNota());
+    }
 
-        Map<String, Student> mapDupaNume = new HashMap<>();
+    static Set<Student> imparteInDouaFormatii(Set<Student> studenti, String formatia1, String formatia2) {
+        Set<Student> rezultat = new HashSet<>();
+        int jumatate = studenti.size() / 2;
+        int contor = 0;
 
-        for (Student s : mapInitial.values()) {
-            String cheieNoua = s.getPrenume() + "-" + s.getNume();
-            mapDupaNume.put(cheieNoua, s);
+        for (Student st : studenti) {
+            if (contor < jumatate) {
+                rezultat.add(schimbaFormatia(st, formatia1));
+            } else {
+                rezultat.add(schimbaFormatia(st, formatia2));
+            }
+            contor++;
         }
-        String cheieCautata = prenume + "-" + nume;
-        Student studentCautat = mapDupaNume.get(cheieCautata);
-
-        if (studentCautat != null) {
-            return studentCautat.getNota();
-        }
-        return 0.0f;
+        return rezultat;
     }
 }
