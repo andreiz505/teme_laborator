@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 public class Problema2 {
     public static void main(String[] args) {
-        String text ;
+        String text = "Acesta este un program scris pentru expresii lambda";
         List<String> cuvinte = Arrays.asList(text.split(" "));
 
         List<String> filtrate = cuvinte.stream()
