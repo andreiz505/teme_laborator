@@ -1,3 +1,5 @@
+package lab7;
+
 public class PasswordMaker {
     private static final PasswordMaker instance;
     private static int count = 0;

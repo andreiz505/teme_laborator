@@ -1,3 +1,7 @@
+package lab10;
+
+import lab10.Student;
+
 import java.util.Arrays;
 import java.util.List;
 

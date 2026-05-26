@@ -1,3 +1,7 @@
+package lab10;
+
+import lab10.Student;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;

@@ -1,3 +1,5 @@
+package lab7;
+
 public abstract class Form {
     private static int counter = 0;
 
